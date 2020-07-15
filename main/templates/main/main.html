@@ -1,0 +1,61 @@
+{% load bootstrap4 i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock title %}</title>
+    {% bootstrap_css %}
+    <style type="text/css">
+        .alert.alert-success.alert-dismissible.fade.show {
+            clear: both;
+            margin-top: 70px;
+            margin-bottom: -60px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Events</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">{% trans 'Home' %} </a>
+            </li>
+            <li>
+                <a class="nav-link" href="{% url 'new-event' %}">{% trans 'Add event' %}</a>
+            </li>
+        </ul>
+        {% if request.user.is_authenticated %}
+            <div class="loggedin" style="color: white;margin-right: 10px;">{% trans 'Logged in as ' %}
+                <strong>{{ request.user.email }}</strong></div>
+            <a class="btn btn-primary btn-sm" href="{% url 'account_logout' %}">{% trans 'Logout' %}</a>
+        {% else %}
+            <a class="btn btn-primary btn-sm" href="{% url 'account_login' %}">{% trans 'Login' %}</a>
+        {% endif %}
+
+    </div>
+</nav>
+
+<main role="main" class="container">
+    {# Display django.contrib.messages as Bootstrap alerts #}
+    {% bootstrap_messages %}
+    <div class="row" style="clear: both;padding-top:50px;">
+        <div class="col-sm-12">
+            <h1 style="margin-top: 15px;">{% block pag_title %}default title{% endblock pag_title %}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+             {% block content %}default content{% endblock content %}
+        </div>
+    </div>
+</main><!-- /.container -->
+{% bootstrap_javascript jquery='full' %}
+</body>
+</html>

@@ -1,5 +1,5 @@
 """
-ASGI config for sherpany project.
+ASGI config for demo-events-app project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

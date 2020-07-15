@@ -1,5 +1,5 @@
 """
-WSGI config for sherpany project.
+WSGI config for demo-events-apq project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

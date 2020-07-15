@@ -1,0 +1,2 @@
+SIGNUP = 'signup'
+WITHDRAW = 'withdraw'

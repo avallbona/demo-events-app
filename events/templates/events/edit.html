@@ -1,0 +1,23 @@
+{% extends "main/main.html" %}
+{% load bootstrap4 i18n %}
+
+{% block pag_title %}
+    {% if object.id %}
+        {% trans 'Update event' %}
+    {% else %}
+        {% trans 'Add event' %}
+    {% endif %}
+{% endblock pag_title%}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+        <form action="" method="post" class="">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button 'Back' button_type="link" href="/" button_class="btn-success btn-sm" %}
+        {% bootstrap_button 'Save' button_type="submit" button_class="btn-primary float-right" %}
+        </form>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,7 +1,47 @@
-{% extends "main/base.html" %}
+{% extends "main/main.html" %}
+{% load bootstrap4 i18n %}
+
+{% block pag_title %}
+    {% trans 'Event list' %}
+{% endblock %}
 
 {% block content %}
 
-    <h1>This is it</h1>
+    {% if page_obj.paginator.count > 0 %}
+    <table class="table table-bordered table-condensed table-striped table-hover">
+        <thead>
+        <tr>
+            <th scope="col">{% trans 'Title' %}</th>
+            <th scope="col">{% trans 'Date' %}</th>
+            <th scope="col">{% trans 'Num. attendees' %}</th>
+            <th scope="col">{% trans 'Owner' %}</th>
+            <th scope="col">&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in object_list %}
+            <tr>
+                <td>
+                    <a href="{% url 'detail-event' item.id %}">{{ item.title }}</a>
+                </td>
+                <td>{{ item.event_date }}</td>
+                <td>{{ item.num_attendees }}</td>
+                <td>{{ item.owner }}</td>
+                <td>&nbsp;
+                    {% if request.user == item.owner %}
+                        <a href="{% url 'edit-event' item.id %}" class="btn btn-success btn-sm">{% trans 'Edit' %}</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>{% trans 'No results' %}</p>
+    {% endif %}
 
-{% endblock content %}
+
+    {% if page_obj.paginator.num_pages > 1 %}
+        {% bootstrap_pagination page_obj %}
+    {% endif %}
+{% endblock %}

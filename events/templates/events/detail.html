@@ -1,0 +1,24 @@
+{% extends "main/main.html" %}
+{% load bootstrap4 i18n %}
+
+{% block pag_title %}{% trans 'Event detail' %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h2>{{ object.title }}</h2>
+            <p>{{ object.description|linebreaks }} </p>
+            <p>{% trans 'Owner' %}: <strong>{{ object.owner }}</strong></p>
+            <form action="{% url 'detail-event' object.id %}" method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% bootstrap_button 'Back' button_type="link" href="/" button_class="btn-success btn-sm" %}
+                {% if already_signed_to_event %}
+                    {% bootstrap_button 'Withdraw' button_type="submit" button_class="btn-primary float-right" %}
+                {% else %}
+                    {% bootstrap_button 'Sign up' button_type="submit" button_class="btn-primary float-right" %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+{% endblock content %}

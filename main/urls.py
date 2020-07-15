@@ -1,4 +1,4 @@
-"""sherpany URL Configuration
+"""demo-events-app URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -33,8 +33,12 @@ urlpatterns += i18n_patterns(
 
 
 if settings.DEBUG:
+    import debug_toolbar
     from django.views import static
     urlpatterns += [
         url(r'^media/(?P<path>.*)$', static.serve, {'document_root': settings.MEDIA_ROOT}),
         url(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT}),
     ]
+    urlpatterns = [
+      path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

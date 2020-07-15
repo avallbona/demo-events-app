@@ -8,6 +8,7 @@ django = "*"
 django-extensions = "*"
 "django-bootstrap4" = "*"
 django-allauth = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]
 
