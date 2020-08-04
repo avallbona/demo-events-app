@@ -26,7 +26,7 @@
                 </td>
                 <td>{{ item.event_date }}</td>
                 <td>{{ item.num_attendees }}</td>
-                <td>{{ item.owner }}</td>
+                <td>{{ item.owner.email }}</td>
                 <td>&nbsp;
                     {% if request.user == item.owner %}
                         <a href="{% url 'edit-event' item.id %}" class="btn btn-success btn-sm">{% trans 'Edit' %}</a>

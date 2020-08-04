@@ -13,7 +13,7 @@
                 {% csrf_token %}
                 {% bootstrap_form form %}
                 {% bootstrap_button 'Back' button_type="link" href="/" button_class="btn-success btn-sm" %}
-                {% if already_signed_to_event %}
+                {% if form.action.value == 'withdraw' %}
                     {% bootstrap_button 'Withdraw' button_type="submit" button_class="btn-primary float-right" %}
                 {% else %}
                     {% bootstrap_button 'Sign up' button_type="submit" button_class="btn-primary float-right" %}

@@ -115,18 +115,36 @@ class DetailEventView(LoginRequiredMixin, SuccessMessageMixin, FormMixin, Detail
         initial['event_id'] = self.event_id
         return initial
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     def form_valid(self, form):
         event_id = form.cleaned_data['event_id']
         action = form.cleaned_data['action']
         if action == SIGNUP:
-            event_attendee = EventAttendee.objects.create(
+            event_attendee, created = EventAttendee.objects.get_or_create(
                 user=self.request.user, event_id=event_id
             )
-            self.success_message = _(f'Signed to event {event_attendee.event.title} successfully')
+            if created:
+                self.success_message = _(f'Signed to event {event_attendee.event.title} successfully')
+            else:
+                self.success_message = _(f'Already signed to {event_attendee.event.title}')
         elif action == WITHDRAW:
-            event_attendee = EventAttendee.objects.get(event_id=event_id, user=self.request.user)
-            self.success_message = _(f'Withdrawed from event {event_attendee.event.title} successfully')
-            event_attendee.delete()
+            try:
+                event_attendee = EventAttendee.objects.get(event_id=event_id, user=self.request.user)
+                self.success_message = _(f'Withdrawed from event {event_attendee.event.title} successfully')
+                event_attendee.delete()
+            except EventAttendee.DoesNotExist:
+                try:
+                    event = Event.objects.get(pk=event_id)
+                    title = event.title
+                except Event.DoesNotExist:
+                    title = ''
+                self.success_message = _(f'Already withdrawed from event {title}')
+        else:
+            self.success_message = _(f'Wrong action')
         self.success_url = reverse_lazy('detail-event', kwargs={'pk': event_id})
 
         return super().form_valid(form)
@@ -140,4 +158,5 @@ class DetailEventView(LoginRequiredMixin, SuccessMessageMixin, FormMixin, Detail
         if form.is_valid():
             return self.form_valid(form)
         else:
+            self.object = Event.objects.get(pk=self.event_id)
             return self.form_invalid(form)

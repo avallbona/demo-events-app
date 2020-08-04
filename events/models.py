@@ -37,3 +37,4 @@ class EventAttendee(models.Model):
     class Meta:
         verbose_name = _('Attendee')
         verbose_name_plural = _('Attendees')
+        unique_together = ('event', 'user')

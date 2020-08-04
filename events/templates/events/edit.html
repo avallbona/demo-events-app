@@ -14,6 +14,7 @@
         <div class="col-md-12">
         <form action="" method="post" class="">
         {% csrf_token %}
+        {% bootstrap_form_errors form %}
         {% bootstrap_form form %}
         {% bootstrap_button 'Back' button_type="link" href="/" button_class="btn-success btn-sm" %}
         {% bootstrap_button 'Save' button_type="submit" button_class="btn-primary float-right" %}
