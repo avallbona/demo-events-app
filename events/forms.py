@@ -42,6 +42,11 @@ class ActionForm(forms.Form):
         super().__init__(*args, **kwargs)
 
     def clean(self):
+        """
+        validate the action field depending on the user signment to event
+
+        :return:
+        """
         cleaned_data = super().clean()
         action = cleaned_data.get('action')
 
