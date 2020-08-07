@@ -1,0 +1,11 @@
+version: "2"
+services:
+  devel:
+    build: .
+    restart: always
+    command: run-devel
+    env_file: .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app
