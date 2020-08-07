@@ -43,6 +43,19 @@ firefox http://127.0.0.1:8000/
 ```
 
 
+## Running it with docker-compose
+
+### Requirements
+
+- [docker](https://www.docker.com/)
+- [docker-compose](https://docs.docker.com/compose/)
+
+### Running it
+
+```bash
+docker-compose up --build devel
+```
+
 ## Additional info
 
 - Create a super user in order to access the django administrator
