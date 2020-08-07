@@ -9,6 +9,7 @@ django-extensions = "*"
 "django-bootstrap4" = "*"
 django-allauth = "*"
 django-debug-toolbar = "*"
+python-decouple = "*"
 
 [dev-packages]
 
