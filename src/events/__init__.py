@@ -1,2 +1,2 @@
-SIGNUP = 'signup'
-WITHDRAW = 'withdraw'
+SIGNUP = "signup"
+WITHDRAW = "withdraw"

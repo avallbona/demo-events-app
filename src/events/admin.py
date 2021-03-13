@@ -10,11 +10,13 @@ class EventAttendeeInline(admin.TabularInline):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('title', 'event_date', 'num_attendees')
-    inlines = [EventAttendeeInline, ]
+    list_display = ("title", "event_date", "num_attendees")
+    inlines = [
+        EventAttendeeInline,
+    ]
 
     def get_queryset(self, request):
-        return super().get_queryset(request).annotate(num_attendees=Count('attendees'))
+        return super().get_queryset(request).annotate(num_attendees=Count("attendees"))
 
     @staticmethod
     def num_attendees(obj):

@@ -17,28 +17,38 @@ from django.conf import settings
 from django.conf.urls import url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
-from django.urls import path, include, re_path
+from django.urls import include, path, re_path
 
 from events.views import HomeView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
-    path('', HomeView.as_view())
+    path("admin/", admin.site.urls),
+    path("accounts/", include("allauth.urls")),
+    path("api/", include("api.urls")),
+    path("", HomeView.as_view()),
 ]
 
 urlpatterns += i18n_patterns(
-    re_path(r'^events/', include('events.urls')),
+    re_path(r"^events/", include("events.urls")),
 )
 
 
 if settings.DEBUG:
     import debug_toolbar
     from django.views import static
+
     urlpatterns += [
-        url(r'^media/(?P<path>.*)$', static.serve, {'document_root': settings.MEDIA_ROOT}),
-        url(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT}),
+        url(
+            r"^media/(?P<path>.*)$",
+            static.serve,
+            {"document_root": settings.MEDIA_ROOT},
+        ),
+        url(
+            r"^static/(?P<path>.*)$",
+            static.serve,
+            {"document_root": settings.STATIC_ROOT},
+        ),
     ]
     urlpatterns = [
-      path('__debug__/', include(debug_toolbar.urls)),
+        path("__debug__/", include(debug_toolbar.urls)),
     ] + urlpatterns

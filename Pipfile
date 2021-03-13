@@ -10,8 +10,15 @@ django-extensions = "*"
 django-allauth = "*"
 django-debug-toolbar = "*"
 python-decouple = "*"
+djangorestframework = "*"
+markdown = "*"
+django-filter = "*"
 
 [dev-packages]
+pytest-django = "*"
+model-bakery = "*"
+pytest-sugar = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.6"
