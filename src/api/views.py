@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from rest_framework import mixins, viewsets, status
+from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
@@ -31,7 +31,7 @@ class EventApiViewSet(
         """when creating an event always setting the user as owner"""
         serializer.save(owner=self.request.user)
 
-    @action(detail=True, methods=['post'], url_path='sign-in')
+    @action(detail=True, methods=["post"], url_path="sign-in")
     def sign_in(self, request, pk):
         """signing in into an event"""
         event = get_object_or_404(Event, pk=pk)
@@ -43,7 +43,7 @@ class EventApiViewSet(
         EventAttendee.objects.create(event=event, user=request.user)
         return Response(status=status.HTTP_200_OK)
 
-    @action(detail=True, methods=['delete'])
+    @action(detail=True, methods=["delete"])
     def withdraw(self, request, pk):
         """withdrawing from an event"""
         event = get_object_or_404(Event, pk=pk)

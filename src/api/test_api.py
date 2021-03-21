@@ -87,13 +87,16 @@ def test_not_allowed_event_in_the_past(my_client, my_user):
     data = {
         "title": "new title",
         "description": "new description",
-        "event_date": (timezone.now()-timedelta(days=3)).strftime("%Y-%m-%d"),
+        "event_date": (timezone.now() - timedelta(days=3)).strftime("%Y-%m-%d"),
     }
     url = reverse("event-list")
     response = my_client.post(url, data=data, content_type="application/json")
     assert response.status_code == 400
     assert Event.objects.all().count() == 0
-    assert response.json().get('event_date')[0] == "not allowed to create events in the past"
+    assert (
+        response.json().get("event_date")[0]
+        == "not allowed to create events in the past"
+    )
 
 
 @pytest.mark.django_db
@@ -132,7 +135,7 @@ def test_sign_in_event_in_an_already_signed_in_event(my_client, single_event, my
     response = my_client.post(url)
 
     assert response.status_code == 400
-    assert response.json().get('status') == "already signed in"
+    assert response.json().get("status") == "already signed in"
     assert EventAttendee.objects.filter(user=my_user, event=single_event).count() == 1
 
 
@@ -152,5 +155,5 @@ def test_withdraw_event_not_signed_in(my_client, single_event, my_user):
     url = reverse("event-withdraw", kwargs={"pk": single_event.id})
     response = my_client.delete(url)
     assert response.status_code == 400
-    assert response.json().get('status') == "not signed in"
+    assert response.json().get("status") == "not signed in"
     assert not EventAttendee.objects.filter(event=single_event, user=my_user).exists()
