@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.translation import gettext_lazy as _
 from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
@@ -38,7 +39,7 @@ class EventApiViewSet(
         event = get_object_or_404(Event, pk=pk)
         if EventAttendee.objects.filter(event=event, user=request.user).exists():
             return Response(
-                data={"status": "already signed in"},
+                data={"status": _("already signed in")},
                 status=status.HTTP_400_BAD_REQUEST,
             )
         EventAttendee.objects.create(event=event, user=request.user)
@@ -51,7 +52,7 @@ class EventApiViewSet(
         qs = EventAttendee.objects.filter(event=event, user=request.user)
         if not qs.exists():
             return Response(
-                data={"status": "not signed in"},
+                data={"status": _("not signed in")},
                 status=status.HTTP_400_BAD_REQUEST,
             )
         qs.delete()
