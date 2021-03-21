@@ -17,15 +17,16 @@ class EventApiViewSet(
     mixins.ListModelMixin,
     viewsets.GenericViewSet,
 ):
-    queryset = Event.objects.all()
+    queryset = Event.actives.all()
     serializer_class = EventSerializer
 
     def get_queryset(self):
         """overwritten queryset in order to only allow
         modification/deletion of an event by its owner"""
+        qs = super().get_queryset()
         if self.request.method in ["PATCH", "PUT", "DELETE"]:
-            return super().get_queryset().filter(owner=self.request.user)
-        return super().get_queryset()
+            qs = qs.filter(owner=self.request.user)
+        return qs
 
     def perform_create(self, serializer):
         """when creating an event always setting the user as owner"""

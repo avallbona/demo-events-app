@@ -4,13 +4,6 @@ import pytest
 from django.utils import timezone
 from rest_framework.reverse import reverse
 
-# todo test
-#   - DONE - add event
-#   - DONE - detail event
-#   - DONE - list events
-#   - DONE - delete event
-#   - DONE - signup event
-#   - DONE - withdraw event
 from events.models import Event, EventAttendee
 
 

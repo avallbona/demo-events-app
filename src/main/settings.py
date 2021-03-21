@@ -27,7 +27,7 @@ SECRET_KEY = config("SECRET_KEY", "v0g*x-*lfk%pix-fnmlnlz@%ua*(f-rr)+v65i0texf!x
 # DEBUG = True
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
