@@ -1,6 +1,6 @@
 # https://hub.docker.com/_/python/
 FROM python:3.6.9
-MAINTAINER andreu vallbona
+MAINTAINER andreu vallbonaa
 WORKDIR /app
 
 COPY docker/locale.gen /etc/locale.gen
@@ -11,10 +11,12 @@ RUN ln -s /usr/local/bin/python /bin/python
 COPY Pipfile* /srv/
 RUN pip install -U pip && pip install pipenv
 WORKDIR /srv
-RUN pipenv install --system --ignore-pipfile
+RUN pipenv install --system --ignore-pipfile --dev
 # end pipenv
 
 WORKDIR /app
 COPY src/ .
+#COPY src/setup.cfg .
+
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["run-devel"]

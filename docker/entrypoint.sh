@@ -12,6 +12,11 @@ case $1 in
         exec python manage.py migrate
         echo "✓ Migrations applied"
         ;;
+    launch-tests)
+        echo "→ Executing tests"
+        exec pytest
+        echo "✓ Executed tests"
+        ;;
     *)
         exec "$@"
         ;;
