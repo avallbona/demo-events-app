@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "debug_toolbar",
     "rest_framework",
+    "drf_yasg",
     # my apps
     "events",
     "api",

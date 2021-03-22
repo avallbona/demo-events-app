@@ -13,6 +13,7 @@ python-decouple = "*"
 djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
+drf-yasg = "*"
 
 [dev-packages]
 pytest-django = "*"
