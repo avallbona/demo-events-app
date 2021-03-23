@@ -16,7 +16,7 @@ RUN pipenv install --system --ignore-pipfile --dev
 
 WORKDIR /app
 COPY src/ .
-#COPY src/setup.cfg .
+COPY setup.cfg .
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["run-devel"]

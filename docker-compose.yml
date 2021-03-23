@@ -9,3 +9,9 @@ services:
       - "8000:8000"
     volumes:
       - ./src:/app
+  tests:
+    build: .
+    command: launch-tests
+    env_file: .env
+    environment:
+      - DJANGO_SETTINGS_MODULE=main.test_settings
