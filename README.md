@@ -14,7 +14,7 @@
 
 ```bash
 cd demo-events-app
-pipenv install    
+pipenv install --dev    
 ```
 
 - Activate virtualenv
@@ -33,6 +33,12 @@ python manage.py migrate
 
 ```bash
 python manage.py runserver  
+```
+
+- Execute tests
+
+```bash
+pytest  
 ```
 
 
@@ -54,6 +60,13 @@ firefox http://127.0.0.1:8000/
 
 ```bash
 docker-compose up --build devel
+```
+
+### Execute tests
+
+```bash
+docker-compose build
+docker-compose run --rm tests
 ```
 
 ## Additional info
