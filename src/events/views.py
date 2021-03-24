@@ -50,7 +50,7 @@ class HomeView(LoginRequiredMixin, ListView):
     """
 
     template_name = "events/list.html"
-    queryset = Event.actives.all()
+    queryset = Event.actives.all().order_by("event_date")
     paginate_by = 10
 
 
