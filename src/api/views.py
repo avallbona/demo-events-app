@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext_lazy as _
-from rest_framework import mixins, status, viewsets
+from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
@@ -9,15 +9,7 @@ from api.serializers import EventSerializer
 from events.models import Event, EventAttendee
 
 
-class EventApiViewSet(
-    LoginRequiredMixin,
-    mixins.CreateModelMixin,
-    mixins.RetrieveModelMixin,
-    mixins.UpdateModelMixin,
-    mixins.DestroyModelMixin,
-    mixins.ListModelMixin,
-    viewsets.GenericViewSet,
-):
+class EventApiViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
     queryset = Event.actives.all()
     serializer_class = EventSerializer
 

@@ -1,0 +1,4 @@
+[run]
+branch=True
+source=./src
+command_line=-m pytest ./src

@@ -17,6 +17,7 @@ RUN pipenv install --system --ignore-pipfile --dev
 WORKDIR /app
 COPY src/ .
 COPY setup.cfg .
+COPY .coveragerc .
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["run-devel"]

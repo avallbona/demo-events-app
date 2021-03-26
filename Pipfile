@@ -20,6 +20,8 @@ pytest-django = "*"
 model-bakery = "*"
 pytest-sugar = "*"
 pytest = "*"
+coverage = "*"
+importlib-metadata = "*"
 
 [requires]
 python_version = "3.6"
