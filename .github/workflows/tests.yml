@@ -25,8 +25,6 @@ jobs:
           command: lock --dev -r > requirements.txt
       - name: Install pipenv and django
         run: |
-#          pip install pipenv
-#          pipenv lock --dev -r > requirements.txt
           pip install -r requirements.txt
           pip install "${{ matrix.django }}"
       - name: Run tests
