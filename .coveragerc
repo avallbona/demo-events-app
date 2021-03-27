@@ -6,6 +6,7 @@ omit=
     src/main/urls.py,
     src/manage.py,
     src/*/migrations/*
+    src/tests/*
     src/main/wsgi.py
     src/main/asgi.py
     src/*/apps.py
