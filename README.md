@@ -41,6 +41,15 @@ python manage.py runserver
 pytest  
 ```
 
+- Execute tests with Coverage
+
+```bash
+coverage run 
+coverage report 
+coverage html  
+```
+
+
 
 ## Open app in the browser
 
