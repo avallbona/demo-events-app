@@ -10,12 +10,12 @@ jobs:
     strategy:
       matrix:
 #        python: [3.6, 3.7, 3.8 ]
-        python: [ 3.6, 3.7 ]
+        python: [ 3.6 ]
         django: [
-#          "Django>=1.11,<2.0",
-#          "Django>=2.0,<2.1",
-#          "Django>=2.1,<2.2",
-#          "Django>=2.2,<3.0",
+          "Django>=1.11,<2.0",
+          "Django>=2.0,<2.1",
+          "Django>=2.1,<2.2",
+          "Django>=2.2,<3.0",
           "Django>=3.0,<4.0"
         ]
 #        exclude:
@@ -29,8 +29,8 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Install pipenv and django
         run: |
-          sed  's/python_version = "3.6"/python_version = "${{ matrix.python }}"/' Pipfile > Pipfile
-          sed '0,/"python_version": "3.6"/s//"python_version": "${{ matrix.python }}"/' Pipfile.lock > Pipfile.lock
+#          sed  's/python_version = "3.6"/python_version = "${{ matrix.python }}"/' Pipfile > Pipfile
+#          sed '0,/"python_version": "3.6"/s//"python_version": "${{ matrix.python }}"/' Pipfile.lock > Pipfile.lock
           pip install pipenv
           pipenv lock --dev -r > requirements.txt
           pip install -r requirements.txt
