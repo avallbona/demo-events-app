@@ -29,8 +29,8 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Install pipenv and django
         run: |
-          pip install pipenv
           sed  's/python_version = "3.6"/python_version = "${{ matrix.python }}"/' Pipfile > Pipfile
+          pip install pipenv
           pipenv lock --dev -r > requirements.txt
           pip install -r requirements.txt
           pip install "${{ matrix.django }}"
