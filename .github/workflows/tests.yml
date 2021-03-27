@@ -24,7 +24,6 @@ jobs:
         with:
           command: |
             lock --dev -r > requirements.txt
-        run: |
             pip install -r requirements.txt
             pip pip install "${{ matrix.django }}"
       - name: Run tests
