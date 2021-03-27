@@ -2,3 +2,10 @@
 branch=True
 source=./src
 command_line=-m pytest ./src
+omit=
+    src/main/urls.py,
+    src/manage.py,
+    src/*/migrations/*
+    src/main/wsgi.py
+    src/main/asgi.py
+    src/*/apps.py
