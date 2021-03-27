@@ -32,6 +32,5 @@ jobs:
           pip install "${{ matrix.django }}"
       - name: Run tests
         run: |
-          cd src
           coverage run
           coverage report -m
