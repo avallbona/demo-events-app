@@ -86,7 +86,7 @@ class EditEventView(
         return super().get_queryset().filter(owner=self.request.user)
 
 
-class DetailEventView(LoginRequiredMixin, SuccessMessageMixin, FormMixin, DetailView):
+class DetailEventView(LoginRequiredMixin, FormMixin, DetailView, SuccessMessageMixin):
     """
     view that manages the view of the event detail
     and the actions to be taken on it, signup and withdraw
@@ -129,9 +129,13 @@ class DetailEventView(LoginRequiredMixin, SuccessMessageMixin, FormMixin, Detail
         kwargs["user"] = self.request.user
         return kwargs
 
+    def get_data(self, form):
+        event_id = form.cleaned_data.get("event_id")
+        action = form.cleaned_data.get("action")
+        return event_id, action
+
     def form_valid(self, form):
-        event_id = form.cleaned_data["event_id"]
-        action = form.cleaned_data["action"]
+        event_id, action = self.get_data(form)
         if action == SIGNUP:
             event_attendee, created = EventAttendee.objects.get_or_create(
                 user=self.request.user, event_id=event_id
@@ -154,11 +158,8 @@ class DetailEventView(LoginRequiredMixin, SuccessMessageMixin, FormMixin, Detail
                 )
                 event_attendee.delete()
             except EventAttendee.DoesNotExist:
-                try:
-                    event = Event.objects.get(pk=event_id)
-                    title = event.title
-                except Event.DoesNotExist:
-                    title = ""
+                event = Event.objects.filter(pk=event_id).first()
+                title = event.title if event else ""
                 self.success_message = _(f"Already withdrawed from event {title}")
         else:
             self.success_message = _("Wrong action")

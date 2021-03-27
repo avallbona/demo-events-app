@@ -51,9 +51,6 @@ class ActionForm(forms.Form):
         cleaned_data = super().clean()
         action = cleaned_data.get("action")
 
-        if action not in [SIGNUP, WITHDRAW]:
-            raise ValidationError(_("Wrong action"))
-
         event_id = cleaned_data.get("event_id")
         already_signed = EventAttendee.objects.filter(
             user=self.user, event_id=event_id
@@ -63,3 +60,4 @@ class ActionForm(forms.Form):
             raise ValidationError(_("Wrong action, already signed"))
         elif action == WITHDRAW and not already_signed:
             raise ValidationError(_("Wrong action, already withdrawed"))
+        return cleaned_data

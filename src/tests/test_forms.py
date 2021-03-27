@@ -70,4 +70,4 @@ def test_action_form_wrong_action(single_event, my_user):
     send_data = {"event_id": single_event.pk, "action": "WRONG_ACTION"}
     form = ActionForm(data=send_data, user=my_user)
     assert not form.is_valid()
-    assert "wrong action" in str(form.errors).lower()
+    assert "select a valid choice" in str(form.errors).lower()
