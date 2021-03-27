@@ -22,6 +22,7 @@ jobs:
       - name: Install pipenv and create requirements.txt
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
+          python-version: ${{ matrix.python }}
           command: lock --dev -r > requirements.txt
       - name: Install pipenv and django
         run: |
