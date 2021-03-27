@@ -33,4 +33,5 @@ jobs:
       - name: Run tests
         run: |
           cd src
-          pytest -v
+          coverage run
+          coverage report -m
