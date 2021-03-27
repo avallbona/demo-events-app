@@ -10,3 +10,7 @@ omit=
     src/main/wsgi.py
     src/main/asgi.py
     src/*/apps.py
+
+[report]
+skip_empty=True
+sort=cover
