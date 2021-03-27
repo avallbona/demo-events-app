@@ -29,6 +29,9 @@ jobs:
       - name: Install pipenv and django
         run: |
           pip install pipenv
-          pipenv install --dev "${{ matrix.django }}"
+          pipenv lock --dev -r > requirements.txt
+          pip install "${{ matrix.django }}"
       - name: Run tests
-        run: pytest -v
+        run: |
+          cd src
+          pytest -v
