@@ -9,13 +9,12 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-#        python: [ 3.6, 3.7, 3.8 ]
-        python: [ 3.6 ]
+        python: [ 3.6, 3.7, 3.8 ]
         django: [
-#            "Django>=1.11,<2.0",
-#            "Django>=2.0,<2.1",
-#            "Django>=2.1,<2.2",
-#            "Django>=2.2,<3.0",
+            "Django>=1.11,<2.0",
+            "Django>=2.0,<2.1",
+            "Django>=2.1,<2.2",
+            "Django>=2.2,<3.0",
             "Django>=3.0,<4.0"
         ]
     steps:
