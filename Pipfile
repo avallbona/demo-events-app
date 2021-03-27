@@ -21,7 +21,7 @@ model-bakery = "*"
 pytest-sugar = "*"
 pytest = "*"
 coverage = "*"
-importlib-metadata = "*"
+importlib-metadata = "==2.1.1"
 pytest-mock = "*"
 
 [requires]
